@@ -8,7 +8,7 @@ nfeat <- 2
 sig <- 1
 
 for(id in 1:4) { 
-  name_of_sim <- paste("~/Documents/RDirectory/clusterpval-assumptions/simulation-results/type1-est-n", n, "-q", nfeat, "-pt", id, ".Rdata", sep="")
+  name_of_sim <- paste("~/clusterpval-assumptions/simulation-results/type1-est-n", n, "-q", nfeat, "-pt", id, ".Rdata", sep="")
   
   if(file.exists(name_of_sim)) { 
     load(name_of_sim) 
@@ -69,5 +69,5 @@ combined <- (p1 + p2 + p3 + p4) & theme(legend.position = "bottom") &
 
 combined
 
-ggsave(combined + plot_layout(nrow=1, guides = "collect"), file="~/Documents/RDirectory/clusterpval-assumptions/figures/FigureS1.pdf", 
+ggsave(combined + plot_layout(nrow=1, guides = "collect"), file="~/clusterpval-assumptions/figures/FigureS1.pdf", 
               height=3.5, width=12.5)

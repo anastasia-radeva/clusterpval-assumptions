@@ -4,7 +4,7 @@ library(dplyr)
 ev_cat <- NULL
 
 # for evaluation plotting
-name_of_sim <- "~/clusterpval-assumptions/simulation-results/A1-type1-est-n100-q2-pt1.Rdata"
+name_of_sim <- "~/clusterpval-assumptions/simulation-results/A3-type1-est-n100-q2-pt1.Rdata"
 load(name_of_sim)
 ev_cat <- rbind(ev_cat, ev)
 
@@ -140,13 +140,13 @@ bottom_row <- (p3 + p4) +
 combined <- (top_row) / (bottom_row) + 
   plot_layout(heights = c(1, 1)) +
   plot_annotation(
-    title = "Equidistant Clusters Assumptions Violated",
+    title = "Full Covariance Clusters",
     theme = theme(
       plot.title = element_text(size = 18, face = "bold", hjust = 0.5, margin = margin(b = 10))
     )
   )
 
 # Save the Combined Plot
-ggsave("~/clusterpval-assumptions/figures/FigureS1A1.pdf", 
+ggsave("~/clusterpval-assumptions/figures/FigureS1A2.pdf", 
        plot = combined, 
        height = 8, width = 12.5)

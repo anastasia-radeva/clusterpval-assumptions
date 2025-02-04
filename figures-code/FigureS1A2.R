@@ -4,8 +4,8 @@ library(dplyr)
 ev_cat <- NULL
 
 # for evaluation plotting
-name_of_sim <- "~/clusterpval-assumptions/simulation-results/A1-type1-est-n100-q2-pt1.Rdata"
-load(name_of_sim)
+sim <- load_simulation("A2-type1-est-n100-q2-pt1")
+draws <- draws(sim)
 ev_cat <- rbind(ev_cat, ev)
 
 ev_cat$len <- rep(NA, nrow(ev_cat))
@@ -15,33 +15,33 @@ ev_cat$len[grep("len_6", ev_cat$Model)] <- 6
 ev_cat$len <- as.factor(ev_cat$len)
 
 # Draws where we can't reject H0
-average_h0 <- ev_cat[ev_cat$Method == "average-iso-est-test-K-3" & ev_cat$effect == 0, ]
+average_h0 <- ev_cat[ev_cat$Method == "average-iso-est-test-K-3" & ev_cat$effect != 0, ]
 average_h0_filter <- as.data.frame(average_h0 %>% group_by(len))
 
 # Draws where we can reject H0
-average_h1 <- ev_cat[ev_cat$Method == "average-iso-est-test-K-3" & ev_cat$effect != 0, ]
+average_h1 <- ev_cat[ev_cat$Method == "average-iso-est-test-K-3" & ev_cat$effect == 0, ]
 average_h1_filter <- as.data.frame(average_h1 %>% group_by(len))
 
 #### Data Plot ####
 
-
+# WHY ONLY LEN 2 MODELS??
 # First draw where effect is 0 (H0)
-random_h0_draw <- average_h0$Draw[1]
-random_h0_model <- average_h0$Model[1]
-# First draw where effect is not 0 (H1)
-random_h1_draw <- average_h1$Draw[1]
-random_h1_model <- average_h1$Model[1]
-
-draws_0 <- load_draws(dir = "~/clusterpval-assumptions", model_name = random_h0_model, index = 1)@draws
-draws_1 <- load_draws(dir = "~/clusterpval-assumptions", model_name = random_h1_model, index = 1)@draws
-
+exemplary_h0_draw <- average_h0$Draw[1]
+exemplary_h0_model <- average_h0$Model[1]
+# Last draw where effect is not 0 (H1)
+exemplary_h1_draw <- tail(average_h1$Draw, n=1)
+exemplary_h1_model <- tail(average_h1$Model, n=1)
+# Get this draw
+index_0 <- which(sapply(draws, function(x) x@name == exemplary_h0_model))
+draws_0 <- draws[[index_0]]@draws[[exemplary_h0_draw]]
+index_1 <- which(sapply(draws, function(x) x@name == exemplary_h1_model))
+draws_1 <- draws[[index_1]]@draws[[exemplary_h1_draw]]
 # Extract data
-h0_data <- draws_0[[1]][[1]]
-h1_data <- draws_1[[1]][[1]]
-
-# Cluster labels
-h0_clusters <- draws_0[[1]][[3]]
-h1_clusters <- draws_1[[1]][[3]]
+h0_data <- draws_0$data
+h1_data <- draws_1$data
+# Extract cluster labels
+h0_clusters <- draws_0$clusters
+h1_clusters <- draws_1$clusters
 
 # Get the corresponding len value
 h0_len <- as.numeric(as.character(average_h0_filter$len)[1])
@@ -140,13 +140,13 @@ bottom_row <- (p3 + p4) +
 combined <- (top_row) / (bottom_row) + 
   plot_layout(heights = c(1, 1)) +
   plot_annotation(
-    title = "Equidistant Clusters Assumptions Violated",
+    title = "Different Variance Across Clusters",
     theme = theme(
       plot.title = element_text(size = 18, face = "bold", hjust = 0.5, margin = margin(b = 10))
     )
   )
 
 # Save the Combined Plot
-ggsave("~/clusterpval-assumptions/figures/FigureS1A1.pdf", 
+ggsave("~/clusterpval-assumptions/figures/FigureS1A2.pdf", 
        plot = combined, 
        height = 8, width = 12.5)

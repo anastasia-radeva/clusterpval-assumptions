@@ -2,7 +2,7 @@
 
 # QQ-plots of the Wald test p-values and their p-values against the uniform.
 # Under H1.
-# Violates Assumption 1: Evenly spaced cluster means
+# Violates Assumption 3: Clusters are balanced
 
 library(simulator) 
 
@@ -14,7 +14,8 @@ if(Sys.getenv("SGE_TASK_ID") != "") {
 
 n <- 100
 nfeat <- 2
-sig <- 1
+sigma <- 1
+cluster_sizes = c(15, 35, 50)
 
 source("~/clusterpval-assumptions/simulation-code/model_functions.R")
 source("~/clusterpval-assumptions/simulation-code/type1_est_method_functions.R")
@@ -24,7 +25,7 @@ name_of_simulation <- paste("A1-type1-est-n", n, "-q", nfeat, "-pt", this.sim.id
 sim <- new_simulation(name=name_of_simulation, label=name_of_simulation)
 
 sim <- sim %>% 
-  generate_model(make_three_nonequidistant_clusters_mod_with_id, n=n, q=nfeat, 
+  generate_model(make_three_imbalanced_clusters_mod_with_id, n=n, q=nfeat, cluster_sizes=cluster_sizes
                  len=as.list(seq(2, 6, by=2)), id=this.sim.id, 
                  sig=sig, seed=this.sim.id, vary_along = "len")
 sim <- sim %>% simulate_from_model(nsim=10, index=1:10) 

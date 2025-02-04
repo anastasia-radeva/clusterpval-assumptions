@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.1",
+    "Version": "4.1.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -11,7 +11,7 @@
   "Packages": {
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-60",
+      "Version": "7.3-53.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -22,16 +22,15 @@
         "stats",
         "utils"
       ],
-      "Hash": "a56a6365b3fa73293ea8d084be0d9bb0"
+      "Hash": "4ef21dd0348b9abb7f8bd1d77e4cd0c3"
     },
     "Matrix": {
       "Package": "Matrix",
-      "Version": "1.6-0",
+      "Version": "1.3-2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
-        "grDevices",
         "graphics",
         "grid",
         "lattice",
@@ -39,7 +38,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "31262fd18481fab05c5e7258dac163ca"
+      "Hash": "ff280503079ad8623d3c4b1519b24ea2"
     },
     "R6": {
       "Package": "R6",
@@ -225,7 +224,7 @@
     },
     "lattice": {
       "Package": "lattice",
-      "Version": "0.21-8",
+      "Version": "0.20-41",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -236,7 +235,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "0b8a6d63c8770f02a8b5635f3c431e6b"
+      "Hash": "fbd9285028b0263d76d18c95ae51a53d"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -263,7 +262,7 @@
     },
     "mgcv": {
       "Package": "mgcv",
-      "Version": "1.9-1",
+      "Version": "1.8-34",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -276,7 +275,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "110ee9d83b496279960e162ac97764ce"
+      "Hash": "bd4a6c4b600f58651d60d381b0e9a397"
     },
     "munsell": {
       "Package": "munsell",
@@ -291,7 +290,7 @@
     },
     "nlme": {
       "Package": "nlme",
-      "Version": "3.1-162",
+      "Version": "3.1-152",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -301,7 +300,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "0984ce8da8da9ead8643c5cbbb60f83e"
+      "Hash": "35de1ce639f20b5e10f7f46260730c65"
     },
     "patchwork": {
       "Package": "patchwork",

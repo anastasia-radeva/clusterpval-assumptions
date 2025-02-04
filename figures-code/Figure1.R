@@ -22,7 +22,7 @@ p1 <- ggplot() + geom_point(aes(x=Feat1, y=Feat2, col=clusters), alpha=0.5, cex=
         plot.margin = margin(0, 0.1, 0.1, 0.1, "cm")) + 
   theme(legend.position="none") + guides(color=guide_legend(nrow=3,byrow=TRUE))
 
-load("~/Documents/RDirectory/clusterpval-assumptions/simulation-results/sim-naive-type1-n100-q2-sig1.Rdata")
+load("~/clusterpval-assumptions/simulation-results/naive-type1-n100-q2-sig1.Rdata")
 
 p2 <- ggplot() + stat_qq(aes(sample=ev[ev$Method == "average-Z-test-K-3", ][1:2000, ]$pval), distribution=qunif) + 
   geom_abline(slope=1, intercept=0, col="red") + xlab("Theoretical Quantiles") + 
@@ -38,5 +38,5 @@ combined_plot <- p1 + p2 + p3 +
   plot_annotation(caption = "Average linkage HC")
 
 # Save the combined plot as a PDF
-ggsave(combined_plot, file = "~/Documents/RDirectory/clusterpval-assumptions/figures/Figure1.pdf", width = 12, height = 3)
+ggsave(combined_plot, file = "~/clusterpval-assumptions/figures/Figure1.pdf", width = 12, height = 3)
 
